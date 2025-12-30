@@ -138,7 +138,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
               className="absolute inset-0 h-full w-full rounded-full bg-gray-100 dark:bg-neutral-800"
             />
           )}
-          <span className="relative z-20">{item.name}</span>
+          <span className="relative z-20 text-[1rem]">{item.name}</span>
         </a>
       ))}
     </motion.div>
@@ -234,9 +234,9 @@ export const NavbarLogo = () => {
   return (
     <a
       href="#"
-      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-md font-medium text-white no-underline hover:no-underline"
+      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-2xl font-medium text-white no-underline hover:no-underline"
     >
-      <span className="text-white">Alchorian</span>
+      <span className="alchorian_header">Alchorian</span>
     </a>
   );
 };

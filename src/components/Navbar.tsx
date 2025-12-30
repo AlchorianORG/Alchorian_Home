@@ -31,7 +31,7 @@ export function NavbarDemo() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <div className="fixed top-0 inset-x-0 z-50">
+    <div className="fixed top-0 inset-x-0 z-50 my-3">
       <Navbar>
         {/* Desktop Navigation */}
         <NavBody>

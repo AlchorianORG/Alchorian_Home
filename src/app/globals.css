@@ -50,3 +50,15 @@ body {
 *::after {
   box-sizing: border-box;
 }
+@layer components {
+  .heading {
+    @apply font-bold  leading-[1.2] pb-1;
+    @apply bg-clip-text text-transparent;
+    @apply bg-linear-to-b from-neutral-50 to-neutral-400;
+  }
+}
+
+
+/* .alchorian_header{
+  //todo
+} */
