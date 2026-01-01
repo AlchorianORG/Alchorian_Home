@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import { X, Check } from 'lucide-react';
+import Image from "next/image";
+import Alchorian from '../../../public/Alchorian.png';
 
 interface CardType{
   title: string,
@@ -49,9 +51,13 @@ export const Card = React.memo(
           "opacity-100"
         )}
       >
-        <h3 className="text-center alchorian_head text-xl text-#7c3aed md:text-2xl font-medium bg-clip-text w-full text-transparent bg-linear-to-b from-neutral-50 to-neutral-200">
+        <div className="flex items-center justify-center gap-2 w-full">
+
+        {index === 1?<Image src={Alchorian} alt="Logo" width={40} height={40} />:<></>}
+        <h3 className="text-center alchorian_head text-xl text-#7c3aed md:text-2xl font-medium bg-clip-text text-transparent bg-linear-to-b from-neutral-50 to-neutral-200">
           {card.title}
         </h3>
+        </div>
         {
           index === 0? 
           <div className="flex flex-col gap-2">
