@@ -1,5 +1,9 @@
 import React from 'react'
 import { WobbleCard } from './ui/wobble-card'
+import ariaLogo from '../../public/aria_logo.png';
+import adenLogo from '../../public/aden_logo.png';
+import Image from 'next/image';
+
 
 const MeetIntelligence = () => {
     return (
@@ -25,9 +29,10 @@ const MeetIntelligence = () => {
                     containerClassName="col-span-1 h-full bg-transparent min-h-[400px] lg:min-h-[300px]"
                     className=""
                 >
+                    <Image src={ariaLogo} width={80} alt='aria_logo' className='mx-auto w-15 md:w-20' />
                     <div className="max-w-md">
                         <h1 className='heading text-3xl'>Aria</h1>
-                        <h2 className=" mt-10 md:mt-2 lg:mt-2 text-left text-balance text-2xl font-semibold tracking-[-0.015em] text-purple-300">
+                        <h2 className=" mt-2 text-left text-balance text-2xl font-semibold tracking-[-0.015em] text-purple-300">
                             Candidate Intelligence
                         </h2>
                         <p className="mt-2 text-left  text-xl text-gray-300">
@@ -41,9 +46,10 @@ const MeetIntelligence = () => {
                     className=""
                 >
 
+                        <Image src={adenLogo} width={75} alt='aden_logo' className='mx-auto w-15 md:w-20' />
                     <div className="max-w-md">
                         <h1 className='heading text-3xl lg:text-3xl'>Aden</h1>
-                        <h2 className="mt-10 md:mt-2 lg:mt-2  text-left text-balance text-2xl font-semibold tracking-[-0.015em] text-blue-300">
+                        <h2 className="mt-2 text-left text-balance text-2xl font-semibold tracking-[-0.015em] text-blue-300">
                             Recruiter Intelligence
                         </h2>
                         <p className="mt-2 text-left  text-xl text-gray-300">

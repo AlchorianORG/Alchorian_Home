@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import { X, Check } from 'lucide-react';
 import Image from "next/image";
-import Alchorian from '../../../public/Alchorian.png';
+import Alchorian from '../../../public/alchorian_logo.png';
 
 interface CardType{
   title: string,

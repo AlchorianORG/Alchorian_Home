@@ -10,7 +10,7 @@ import {
 
 import React, { useRef, useState } from "react";
 import Image from "next/image";
-import Alchorian from '../../../public/Alchorian.png';
+import Alchorian from '../../../public/alchorian_logo.png';
 
 
 interface NavbarProps {
