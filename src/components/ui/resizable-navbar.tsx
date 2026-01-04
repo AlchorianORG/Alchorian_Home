@@ -11,6 +11,7 @@ import {
 import React, { useRef, useState } from "react";
 import Image from "next/image";
 import Alchorian from '../../../public/alchorian_logo.png';
+import Link from "next/link";
 
 
 interface NavbarProps {
@@ -234,13 +235,13 @@ export const MobileNavToggle = ({
 
 export const NavbarLogo = () => {
   return (
-    <a
-      href="#"
+    <Link
+      href="/"
       className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-2xl font-medium text-white no-underline hover:no-underline"
     >
       <Image src={Alchorian} alt="Logo" width={30} height={30} />
       <span className="alchorian_header">Alchorian</span>
-    </a>
+    </Link>
   );
 };
 
