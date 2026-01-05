@@ -1,6 +1,7 @@
-"use client"
+"use client";
+
 import { motion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 const chapters = [
   {
@@ -26,253 +27,217 @@ const chapters = [
 ];
 
 function ChapterDiagram({ index }: { index: number }) {
-  if (index === 0) {
-    // Role Intent Modeling - Sliders and priorities
-    return (
-      <svg className="w-full h-64" viewBox="0 0 400 200">
-        {[0, 1, 2].map((i) => {
-          const y = 50 + i * 50;
-          return (
-            <g key={i}>
-              <line x1="50" y1={y} x2="350" y2={y} stroke="#374151" strokeWidth="2" />
-              <motion.circle
-                cx={150 + i * 50}
-                cy={y}
-                r="8"
-                fill="#3b82f6"
-                initial={{ cx: 50 }}
-                whileInView={{ cx: 150 + i * 50 }}
-                transition={{ duration: 1.5, delay: i * 0.2 }}
-              />
-              <motion.line
-                x1="50"
-                y1={y}
-                x2={150 + i * 50}
-                y2={y}
-                stroke="#3b82f6"
-                strokeWidth="3"
-                initial={{ x2: 50 }}
-                whileInView={{ x2: 150 + i * 50 }}
-                transition={{ duration: 1.5, delay: i * 0.2 }}
-              />
-            </g>
-          );
-        })}
-      </svg>
-    );
-  }
+  const [active, setActive] = useState(false);
 
-  if (index === 1) {
-    // Candidate Signal Analysis - Layered cards breaking into signals
-    return (
-      <svg className="w-full h-64" viewBox="0 0 400 200">
-        {/* Profile card */}
-        <motion.rect
-          x="80"
-          y="50"
-          width="100"
-          height="120"
-          fill="#1a1a1a"
-          stroke="#374151"
-          strokeWidth="2"
-          rx="4"
-        />
-
-        {/* Signals emerging */}
-        {[0, 1, 2, 3, 4].map((i) => {
-          const targetX = 220 + (i % 2) * 60;
-          const targetY = 60 + i * 25;
-          return (
-            <g key={i}>
-              <motion.line
-                x1="180"
-                y1="110"
-                x2={targetX}
-                y2={targetY}
-                stroke="#3b82f6"
-                strokeWidth="1"
-                opacity="0.5"
-                initial={{ pathLength: 0 }}
-                whileInView={{ pathLength: 1 }}
-                transition={{ duration: 1, delay: 0.5 + i * 0.1 }}
-              />
-              <motion.circle
-                cx={targetX}
-                cy={targetY}
-                r="6"
-                fill={i % 2 === 0 ? "#3b82f6" : "#8b5cf6"}
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                transition={{ duration: 0.3, delay: 1.5 + i * 0.1 }}
-              />
-            </g>
-          );
-        })}
-      </svg>
-    );
-  }
-
-  if (index === 2) {
-    // Intent Matching - Alignment lines snapping together
-    return (
-      <svg className="w-full h-64" viewBox="0 0 400 200">
-        {/* Left side signals */}
-        {[0, 1, 2].map((i) => {
-          const y = 50 + i * 50;
-          return (
-            <motion.circle
-              key={`left-${i}`}
-              cx="80"
-              cy={y}
-              r="8"
-              fill="#3b82f6"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-            />
-          );
-        })}
-
-        {/* Right side signals */}
-        {[0, 1, 2].map((i) => {
-          const y = 50 + i * 50;
-          return (
-            <motion.circle
-              key={`right-${i}`}
-              cx="320"
-              cy={y}
-              r="8"
-              fill="#8b5cf6"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}
-            />
-          );
-        })}
-
-        {/* Connecting lines snapping */}
-        {[0, 1, 2].map((i) => {
-          const y = 50 + i * 50;
-          return (
-            <motion.line
-              key={`line-${i}`}
-              x1="88"
-              y1={y}
-              x2="312"
-              y2={y}
-              stroke="#3b82f6"
-              strokeWidth="2"
-              initial={{ pathLength: 0, opacity: 0 }}
-              whileInView={{ pathLength: 1, opacity: 0.6 }}
-              transition={{ duration: 0.8, delay: 0.8 + i * 0.15 }}
-            />
-          );
-        })}
-      </svg>
-    );
-  }
-
-  // Explainable Reasoning - Highlighted path with annotations
   return (
-    <svg className="w-full h-64" viewBox="0 0 400 200">
-      {/* Decision path */}
-      <motion.path
-        d="M 50 100 L 150 60 L 250 100 L 350 80"
-        fill="none"
-        stroke="#3b82f6"
-        strokeWidth="3"
-        initial={{ pathLength: 0 }}
-        whileInView={{ pathLength: 1 }}
-        transition={{ duration: 2 }}
-      />
+    <motion.div
+      onViewportEnter={() => setActive(true)}
+      viewport={{ once: true, amount: 0.3 }}
+      className="w-full"
+    >
+      {/* 01 — Role Intent Modeling */}
+      {index === 0 && (
+        <svg className="w-full h-64" viewBox="0 0 400 200">
+          {[0, 1, 2].map((i) => {
+            const y = 50 + i * 50;
+            const xTarget = 150 + i * 50;
+            return (
+              <g key={i}>
+                <line x1="50" y1={y} x2="350" y2={y} stroke="#374151" strokeWidth="2" />
+                <motion.line
+                  x1="50"
+                  y1={y}
+                  x2={xTarget}
+                  y2={y}
+                  stroke="#3b82f6"
+                  strokeWidth="3"
+                  animate={active ? { strokeDasharray: "300 0" } : { strokeDasharray: "0 300" }}
+                  transition={{ duration: 1.2, delay: i * 0.2 }}
+                />
+                <motion.circle
+                  cx={xTarget}
+                  cy={y}
+                  r="8"
+                  fill="#3b82f6"
+                  animate={active ? { scale: 1 } : { scale: 0 }}
+                  transition={{ duration: 0.4, delay: 0.6 + i * 0.2 }}
+                />
+              </g>
+            );
+          })}
+        </svg>
+      )}
 
-      {/* Annotation points */}
-      {[
-        { x: 50, y: 100 },
-        { x: 150, y: 60 },
-        { x: 250, y: 100 },
-        { x: 350, y: 80 },
-      ].map((point, i) => (
-        <g key={i}>
-          <motion.circle
-            cx={point.x}
-            cy={point.y}
-            r="6"
-            fill="#3b82f6"
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            transition={{ duration: 0.3, delay: 2 + i * 0.2 }}
+      {/* 02 — Candidate Signal Analysis */}
+      {index === 1 && (
+        <svg className="w-full h-64" viewBox="0 0 400 200">
+          <rect
+            x="80"
+            y="50"
+            width="100"
+            height="120"
+            rx="4"
+            fill="#111"
+            stroke="#374151"
+            strokeWidth="2"
           />
-          <motion.line
-            x1={point.x}
-            y1={point.y - 10}
-            x2={point.x}
-            y2={point.y - 30}
-            stroke="#8b5cf6"
-            strokeWidth="1"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 0.6 }}
-            transition={{ duration: 0.5, delay: 2.3 + i * 0.2 }}
+
+          {[0, 1, 2, 3, 4].map((i) => {
+            const x = 220 + (i % 2) * 60;
+            const y = 60 + i * 25;
+            return (
+              <g key={i}>
+                <motion.line
+                  x1="180"
+                  y1="110"
+                  x2={x}
+                  y2={y}
+                  stroke="#3b82f6"
+                  strokeWidth="1"
+                  opacity="0.6"
+                  animate={active ? { strokeDasharray: "200 0" } : { strokeDasharray: "0 200" }}
+                  transition={{ duration: 0.8, delay: i * 0.1 }}
+                />
+                <motion.circle
+                  cx={x}
+                  cy={y}
+                  r="6"
+                  fill={i % 2 === 0 ? "#3b82f6" : "#8b5cf6"}
+                  animate={active ? { scale: 1 } : { scale: 0 }}
+                  transition={{ duration: 0.3, delay: 0.8 + i * 0.1 }}
+                />
+              </g>
+            );
+          })}
+        </svg>
+      )}
+
+      {/* 03 — Intent Matching */}
+      {index === 2 && (
+        <svg className="w-full h-64" viewBox="0 0 400 200">
+          {[0, 1, 2].map((i) => {
+            const y = 50 + i * 50;
+            return (
+              <g key={i}>
+                <motion.circle
+                  cx="80"
+                  cy={y}
+                  r="8"
+                  fill="#3b82f6"
+                  animate={active ? { opacity: 1 } : { opacity: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                />
+                <motion.circle
+                  cx="320"
+                  cy={y}
+                  r="8"
+                  fill="#8b5cf6"
+                  animate={active ? { opacity: 1 } : { opacity: 0 }}
+                  transition={{ delay: 0.2 + i * 0.1 }}
+                />
+                <motion.line
+                  x1="88"
+                  y1={y}
+                  x2="312"
+                  y2={y}
+                  stroke="#3b82f6"
+                  strokeWidth="2"
+                  opacity="0.6"
+                  animate={active ? { strokeDasharray: "300 0" } : { strokeDasharray: "0 300" }}
+                  transition={{ duration: 0.8, delay: 0.4 + i * 0.15 }}
+                />
+              </g>
+            );
+          })}
+        </svg>
+      )}
+
+      {/* 04 — Explainable Reasoning */}
+      {index === 3 && (
+        <svg className="w-full h-64" viewBox="0 0 400 200">
+          <motion.path
+            d="M 50 100 L 150 60 L 250 100 L 350 80"
+            fill="none"
+            stroke="#3b82f6"
+            strokeWidth="3"
+            animate={active ? { strokeDasharray: "600 0" } : { strokeDasharray: "0 600" }}
+            transition={{ duration: 1.8 }}
           />
-          <motion.rect
-            x={point.x - 20}
-            y={point.y - 50}
-            width="40"
-            height="16"
-            fill="#8b5cf6"
-            opacity="0.2"
-            rx="2"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 0.3 }}
-            transition={{ duration: 0.5, delay: 2.5 + i * 0.2 }}
-          />
-        </g>
-      ))}
-    </svg>
+
+          {[
+            [50, 100],
+            [150, 60],
+            [250, 100],
+            [350, 80],
+          ].map(([x, y], i) => (
+            <motion.circle
+              key={i}
+              cx={x}
+              cy={y}
+              r="6"
+              fill="#3b82f6"
+              animate={active ? { scale: 1 } : { scale: 0 }}
+              transition={{ delay: 1.2 + i * 0.15 }}
+            />
+          ))}
+        </svg>
+      )}
+    </motion.div>
   );
 }
 
 export function HowItWorksSection() {
   const ref = useRef<HTMLElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+  const opacity = isMobile
+    ? 1
+    : useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
   return (
-    <section ref={ref} className="min-h-screen relative bg-gradient-to-b from-[#0a0a0a] to-[#0f0f0f] py-32 px-8">
+    <section
+      ref={ref}
+      className="min-h-screen bg-gradient-to-b from-[#0a0a0a] to-[#0f0f0f] py-32 px-8"
+    >
       <motion.div style={{ opacity }} className="container mx-auto max-w-5xl">
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8 }}
           className="text-gray-500 text-sm uppercase tracking-widest mb-20"
         >
           How Aden Works
         </motion.p>
 
-        {/* Chapters */}
         <div className="space-y-32">
           {chapters.map((chapter, index) => (
             <motion.div
               key={chapter.number}
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.7 }}
               className="grid lg:grid-cols-2 gap-12 items-center"
             >
-              {/* Text */}
               <div className={index % 2 === 1 ? "lg:order-2" : ""}>
-                <div className="text-6xl font-light text-[#3b82f6] mb-4">{chapter.number}</div>
+                <div className="text-6xl font-light text-[#3b82f6] mb-4">
+                  {chapter.number}
+                </div>
                 <h3 className="text-3xl text-white mb-4">{chapter.title}</h3>
                 <p className="text-gray-400 text-lg">{chapter.description}</p>
               </div>
 
-              {/* Diagram */}
-              <div className={`${index % 2 === 1 ? "lg:order-1" : ""} relative`}>
+              <div className={index % 2 === 1 ? "lg:order-1" : ""}>
                 <ChapterDiagram index={index} />
               </div>
             </motion.div>
