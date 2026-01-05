@@ -5,7 +5,7 @@ import Countdown from "./utils/Countdown"
 
 const Aria = () => {
     return (
-        <div id="aria" className='h-[100vh] md:h-[60vh] lg:h-[75vh] flex items-center justify-center pt-10 bg-linear-to-br from-purple-500/50 via-slate-950 to-slate-950 p-5 mt-10'>
+        <div id="aria" className='flex items-center justify-center pt-20 p-5 bg-linear-to-br from-purple-500/50 via-slate-950 to-slate-950  mt-10'>
             <div className='max-w-7xl mx-auto'>
                 <div className="section_title  ">
                     <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-center 

@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input"
 import aden_banner from '../../public/aden_banner.png'
 const Aden = () => {
     return (
-        <div id="aden" className='h-[100vh] md:h-[70vh] lg:h-[70vh] flex items-center justify-center pt-10 bg-linear-to-br from-blue-900/50 via-slate-950 to-slate-950 p-5 mt-10'>
+        <div id="aden" className='flex items-center justify-center pt-10 bg-linear-to-br from-blue-900/50 via-slate-950 to-slate-950 p-5 mt-10'>
             <div className='max-w-7xl mx-auto'>
 
                 <div className="section_title  ">
