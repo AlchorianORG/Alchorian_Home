@@ -100,7 +100,7 @@ export function RevealSection() {
               className="space-y-8 mt-16"
             >
               <p className="text-gray-400 text-xl max-w-2xl mx-auto">
-                An AI hiring system that understands what you're actually looking
+                An AI hiring system that understands what youre actually looking
                 for.
               </p>
 

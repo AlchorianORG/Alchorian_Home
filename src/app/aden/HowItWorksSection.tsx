@@ -158,20 +158,22 @@ function ChapterDiagram({ index }: { index: number }) {
 
 export function HowItWorksSection() {
   const ref = useRef<HTMLElement>(null);
-  const isMobile =
-  typeof window !== "undefined" && window.innerWidth < 768;
 
+  // SSR-safe mobile detection
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const handler = () => setIsMobile(window.innerWidth < 768);
+    handler(); // initial check
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
 
-  const scrollOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.2, 0.8, 1],
-    [0, 1, 1, 0]
-  );
+  const scrollOpacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
   return (
     <section ref={ref} className="min-h-screen bg-[#0a0a0a] py-32 px-8">
