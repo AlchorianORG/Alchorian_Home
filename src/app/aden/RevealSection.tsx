@@ -1,10 +1,21 @@
-'use client'
+'use client';
 
 import { motion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
+
+/* ---------- deterministic PRNG ---------- */
+function mulberry32(seed: number) {
+  return function () {
+    let t = (seed += 0x6d2b79f5);
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
 
 export function RevealSection() {
   const ref = useRef<HTMLElement>(null);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
@@ -13,35 +24,49 @@ export function RevealSection() {
   const opacity = useTransform(scrollYProgress, [0, 0.4, 0.6, 1], [0, 1, 1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.4, 0.6], [0.8, 1, 1]);
 
+  /* ---------- deterministic background lines ---------- */
+  const lines = useMemo(() => {
+    const rand = mulberry32(42); // FIXED SEED — critical
+    return Array.from({ length: 20 }).map(() => ({
+      x1: rand() * 800,
+      y1: rand() * 600,
+      x2: rand() * 800,
+      y2: rand() * 600,
+      color: rand() > 0.5 ? "#3b82f6" : "#8b5cf6",
+    }));
+  }, []);
+
   return (
-    <section ref={ref} className="min-h-screen relative flex items-center bg-[#0a0a0a] px-8">
+    <section
+      ref={ref}
+      className="min-h-screen relative flex items-center bg-[#0a0a0a] px-8"
+    >
       <div className="container mx-auto">
-        <motion.div style={{ opacity, scale }} className="relative max-w-4xl mx-auto">
-          {/* Background intent graph (subtle) */}
-          <svg className="absolute inset-0 w-full h-full opacity-20 -z-10" viewBox="0 0 800 600">
-            {[...Array(20)].map((_, i) => {
-              const x1 = Math.random() * 800;
-              const y1 = Math.random() * 600;
-              const x2 = Math.random() * 800;
-              const y2 = Math.random() * 600;
-              return (
-                <line
-                  key={i}
-                  x1={x1}
-                  y1={y1}
-                  x2={x2}
-                  y2={y2}
-                  stroke={i % 2 === 0 ? "#3b82f6" : "#8b5cf6"}
-                  strokeWidth="1"
-                  opacity="0.3"
-                />
-              );
-            })}
+        <motion.div
+          style={{ opacity, scale }}
+          className="relative max-w-4xl mx-auto"
+        >
+          {/* Background graph */}
+          <svg
+            className="absolute inset-0 w-full h-full opacity-20 -z-10"
+            viewBox="0 0 800 600"
+          >
+            {lines.map((l, i) => (
+              <line
+                key={i}
+                x1={l.x1}
+                y1={l.y1}
+                x2={l.x2}
+                y2={l.y2}
+                stroke={l.color}
+                strokeWidth="1"
+                opacity="0.3"
+              />
+            ))}
           </svg>
 
-          {/* Logo reveal */}
+          {/* Content */}
           <div className="text-center relative">
-            {/* Halo glow */}
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
               whileInView={{ opacity: [0, 0.6, 0.3], scale: [0.5, 1.5, 1.2] }}
@@ -51,14 +76,15 @@ export function RevealSection() {
               <div className="w-64 h-64 rounded-full bg-[#3b82f6] blur-[100px]" />
             </motion.div>
 
-            {/* Logo */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, delay: 1 }}
               className="relative z-10 mb-12"
             >
-              <h1 className="text-9xl font-light text-white tracking-wider">Aden</h1>
+              <h1 className="text-9xl font-light text-white tracking-wider">
+                Aden
+              </h1>
               <motion.div
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
@@ -67,7 +93,6 @@ export function RevealSection() {
               />
             </motion.div>
 
-            {/* Supporting text floating around */}
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -75,7 +100,8 @@ export function RevealSection() {
               className="space-y-8 mt-16"
             >
               <p className="text-gray-400 text-xl max-w-2xl mx-auto">
-                An AI hiring system that understands what you're actually looking for.
+                An AI hiring system that understands what you're actually looking
+                for.
               </p>
 
               <motion.div
@@ -91,29 +117,6 @@ export function RevealSection() {
                 <span>Explainable reasoning</span>
               </motion.div>
             </motion.div>
-
-            {/* Subtle animated signal lines radiating */}
-            {[0, 1, 2, 3, 4, 5].map((i) => (
-              <motion.div
-                key={i}
-                className="absolute top-1/2 left-1/2 w-px h-32 bg-gradient-to-t from-[#3b82f6]/0 to-[#3b82f6]/30"
-                style={{
-                  transformOrigin: "bottom",
-                  transform: `rotate(${i * 60}deg)`,
-                }}
-                initial={{ scaleY: 0, opacity: 0 }}
-                animate={{
-                  scaleY: [0, 1, 1, 0],
-                  opacity: [0, 0.5, 0.5, 0],
-                }}
-                transition={{
-                  duration: 3,
-                  delay: 3 + i * 0.2,
-                  repeat: Infinity,
-                  repeatDelay: 2,
-                }}
-              />
-            ))}
           </div>
         </motion.div>
       </div>
