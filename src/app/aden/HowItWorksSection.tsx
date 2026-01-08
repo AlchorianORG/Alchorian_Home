@@ -176,12 +176,12 @@ export function HowItWorksSection() {
   const scrollOpacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
   return (
-    <section ref={ref} className="min-h-screen bg-[#0a0a0a] py-32 px-8">
+    <section ref={ref} className="min-h-screen bg-[#0a0a0a] py-10 px-8">
       <motion.div
         style={{ opacity: isMobile ? 1 : scrollOpacity }}
         className="container mx-auto max-w-5xl"
       >
-        <p className="text-gray-500 uppercase tracking-widest mb-20">
+        <p className="text-gray-200 text-center text-2xl uppercase tracking-widest mb-20">
           How Aden Works
         </p>
 

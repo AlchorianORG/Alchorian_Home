@@ -16,15 +16,15 @@ export function NavbarDemo() {
   const navItems = [
     {
       name: "Aria",
-      link: "#aria",
+      link: "/#aria",
     },
     {
       name: "Aden",
-      link: "#aden",
+      link: "/#aden",
     },
     {
       name: "How It Works",
-      link: "#hiw",
+      link: "/#hiw",
     },
   ];
 
