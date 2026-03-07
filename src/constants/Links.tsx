@@ -1,0 +1,1 @@
+export const ARIA_LINK = 'https://ariademo.netlify.app';

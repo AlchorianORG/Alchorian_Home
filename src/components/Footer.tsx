@@ -52,7 +52,7 @@ Our focus is clarity, intent, and trust in hiring decisions.
 We are currently in early access and open to conversations.
 
 For demos, partnerships, or general enquiries:
-pranayprasad42@gmail.com
+contact@alcorian.com
 
 We respond personally.
     `,
@@ -63,19 +63,102 @@ We respond personally.
 const legalContent: Record<string, { title: string; description: string }> = {
     privacy: {
         title: "Privacy Policy",
-        description: "This is a preliminary privacy policy for Alchorian. Full policy will be published prior to product launch."
+        description: `
+      <div class="space-y-4 text-sm leading-relaxed">
+        <p><strong>Last Updated:</strong> 07-03-2026</p>
+
+        <p>Alchorian ("we", "us", or "our") operates the Alchorian platform and ARIA resume intelligence tools (the "Service").</p>
+
+        <h3 class="text-white mt-4 font-semibold">1. Information We Collect</h3>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>Name</li>
+          <li>Email address</li>
+          <li>Account credentials</li>
+          <li>Uploaded resumes and documents</li>
+        </ul>
+
+        <h3 class="text-white mt-4 font-semibold">2. How We Use Information</h3>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>Provide and maintain the Service</li>
+          <li>Analyze resumes using ARIA</li>
+          <li>Improve platform functionality</li>
+          <li>Ensure security and prevent fraud</li>
+        </ul>
+
+        <p><strong>We do not sell personal data.</strong></p>
+
+        <h3 class="text-white mt-4 font-semibold">3. Your Rights</h3>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>Access your data</li>
+          <li>Request correction</li>
+          <li>Request deletion</li>
+          <li>Withdraw consent</li>
+        </ul>
+
+        <p>Contact: contact@alchorian.com</p>
+      </div>
+    `
     },
+
     terms: {
         title: "Terms of Service",
-        description: "These terms govern early access and demo usage of Alchorian products."
+        description: `
+      <div class="space-y-4 text-sm leading-relaxed">
+        <p><strong>Last Updated:</strong> 07-03-2026</p>
+
+        <p>By accessing Alchorian, you agree to these Terms.</p>
+
+        <h3 class="text-white mt-4 font-semibold">Acceptable Use</h3>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>No unlawful use</li>
+          <li>No malicious uploads</li>
+          <li>No reverse engineering</li>
+        </ul>
+
+        <h3 class="text-white mt-4 font-semibold">Limitation of Liability</h3>
+        <p>The Service is provided "as is." Alchorian is not liable for hiring decisions made using ARIA.</p>
+
+        <p>Governing Law: England and Wales.</p>
+      </div>
+    `
     },
+
     cookies: {
         title: "Cookie Policy",
-        description: "Alchorian currently uses minimal cookies for essential functionality."
+        description: `
+      <div class="space-y-4 text-sm leading-relaxed">
+        <p><strong>Last Updated:</strong> [Insert Date]</p>
+
+        <p>We use minimal cookies for essential functionality and analytics.</p>
+
+        <ul class="list-disc pl-5 space-y-1">
+          <li>Essential cookies</li>
+          <li>Analytics cookies</li>
+          <li>Performance cookies</li>
+        </ul>
+
+        <p>You may disable cookies in your browser settings.</p>
+      </div>
+    `
     },
+
     gdpr: {
         title: "GDPR Compliance",
-        description: "Alchorian is committed to GDPR compliance and data protection by design."
+        description: `
+      <div class="space-y-4 text-sm leading-relaxed">
+        <p>Alchorian is committed to GDPR compliance and data protection by design.</p>
+
+        <ul class="list-disc pl-5 space-y-1">
+          <li>Right of access</li>
+          <li>Right to rectification</li>
+          <li>Right to erasure</li>
+          <li>Right to restrict processing</li>
+          <li>Right to data portability</li>
+        </ul>
+
+        <p>For GDPR requests: pranayprasad42@gmail.com</p>
+      </div>
+    `
     }
 };
 
@@ -136,15 +219,15 @@ const Footer = () => {
                         <h4 className="mb-4 text-white">Product</h4>
                         <ul className="space-y-3">
                             <li>
-                                <a href="#aden" className="text-gray-400 hover:text-purple-400 transition-colors">
-                                    Aria for candidates <span className='italic text-[15px]'>(Comming Soon)</span>
+                                <a href="#aria" className="text-gray-400 hover:text-purple-400 transition-colors">
+                                    Aria for candidates <span className='italic text-[15px]'>(Beta)</span>
                                 </a>
                             </li>
-                            <li>
+                            {/* <li>
                                 <a href="#aden" className="text-gray-400 hover:text-purple-400 transition-colors">
                                     Aden for Recruiters <span className='italic text-[15px]'>(Early Access)</span>
                                 </a>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
 
@@ -241,9 +324,10 @@ const Footer = () => {
                                                     <DialogTitle className="text-white">
                                                         {content.title}
                                                     </DialogTitle>
-                                                    <DialogDescription className="text-gray-400 mt-2">
-                                                        {content.description}
-                                                    </DialogDescription>
+                                                        <div
+                                                            className="text-gray-400 mt-2 max-h-[60vh] overflow-y-auto"
+                                                            dangerouslySetInnerHTML={{ __html: content.description }}
+                                                        />
                                                 </DialogHeader>
 
                                                 <DialogFooter>

@@ -16,15 +16,15 @@ export function NavbarDemo() {
   const navItems = [
     {
       name: "Aria",
-      link: "/#aria",
+      link: "#aria",
     },
     {
-      name: "Aden",
-      link: "/#aden",
+      name: "Architecture",
+      link: "#hiw",
     },
     {
-      name: "How It Works",
-      link: "/#hiw",
+      name: "Research",
+      link: "#research",
     },
   ];
 
@@ -38,11 +38,8 @@ export function NavbarDemo() {
           <NavbarLogo />
           <NavItems items={navItems} />
           <div className="flex items-center gap-4">
-            <NavbarButton variant="secondary">
-              Join Aria
-            </NavbarButton>
-            <NavbarButton variant="primary">
-              Aden Waitlist
+            <NavbarButton variant="primary" href="https://ariademo.netlify.app">
+              Get Your ATS Score (Beta)
             </NavbarButton>
           </div>
 
@@ -75,19 +72,13 @@ export function NavbarDemo() {
             <div className="flex w-full flex-col gap-4">
               <NavbarButton
                 onClick={() => setIsMobileMenuOpen(false)}
-                variant="secondary"
-                className="w-full"
-              >
-                Join Aria
-              </NavbarButton>
-
-              <NavbarButton
-                onClick={() => setIsMobileMenuOpen(false)}
                 variant="primary"
                 className="w-full"
+                href="https://ariademo.netlify.app"
               >
-                Aden Waitlist
+                Get Your ATS Score (Beta)
               </NavbarButton>
+
             </div>
 
           </MobileNavMenu>
