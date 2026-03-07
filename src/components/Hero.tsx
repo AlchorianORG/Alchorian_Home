@@ -4,6 +4,7 @@ import { Spotlight } from "@/components/ui/spotlight-new";
 import Image from "next/image";
 import heroImg from '../../public/Hero_Banner.png';
 import { Reveal } from "./ui/Reveal";
+import { ARIA_LINK } from "@/constants/Links";
 export function SpotlightNewDemo() {
   return (
     <div className="min-h-screen w-full rounded-md flex items-center justify-center antialiased bg-grid-white/[0.02] relative overflow-hidden">
@@ -19,8 +20,8 @@ export function SpotlightNewDemo() {
           Alchorian builds AI-powered systems that evaluate readiness, structure, and intent — starting with ATS intelligence.
         </p>
       </div>
-      <div className="flex flex-col md:flex-row justify-center items-center gap-3 " >
-        <ButtonCustom variant="primary" href="https://ariademo.netlify.app">Get Your ATS Score (Beta)</ButtonCustom>
+      <div className="flex flex-col md:flex-row justify-center items-center gap-5 " >
+        <ButtonCustom variant="primary" href={ARIA_LINK}>Get Your ATS Score (Beta)</ButtonCustom>
         <ButtonCustom variant="secondary" href="#research">Help Improve Hiring</ButtonCustom>
       </div>
         </div>
@@ -39,7 +40,7 @@ type ButtonProps = {
 
 function ButtonCustom({ children, variant = "primary", href, onClick }: ButtonProps) {
   const base =
-    "px-4 py-2 rounded-md bg-white min-w-[200px] button bg-white text-white text-sm font-bold relative cursor-pointer hover:-translate-y-0.5 transition duration-200 inline-block text-center";
+    "px-4 py-4 rounded-md bg-white min-w-[250px] button bg-white text-white text-md font-bold relative cursor-pointer hover:-translate-y-0.5 transition duration-200 inline-block text-center";
 
   const variants = {
     primary:

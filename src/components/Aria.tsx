@@ -7,6 +7,7 @@ import { Reveal } from "./ui/Reveal"
 import { Button } from "./ui/button"
 import { ArrowRight } from "lucide-react"
 import { ARIA_LINK } from "@/constants/Links"
+
 const Aria = () => {
     return (
         <div id="aria" className='flex items-center justify-center pt-20 p-5   mt-10'>
@@ -28,7 +29,7 @@ const Aria = () => {
                     <div className="aria_info">
                         <Reveal>
 
-                        <div className=" flex flex-col gap-2 mt-2 text-left  text-xl lg:text-1xl text-gray-300  ">
+                        <div className=" flex flex-col gap-2 mt-2  text-xl lg:text-1xl text-center md:text-left text-slate-400 leading-relaxed  ">
 
                             <p className="">
 

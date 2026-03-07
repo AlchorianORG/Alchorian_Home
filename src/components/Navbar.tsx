@@ -11,6 +11,7 @@ import {
   MobileNavMenu,
 } from "@/components/ui/resizable-navbar";
 import { useState } from "react";
+import { ARIA_LINK } from "@/constants/Links";
 
 export function NavbarDemo() {
   const navItems = [
@@ -38,7 +39,7 @@ export function NavbarDemo() {
           <NavbarLogo />
           <NavItems items={navItems} />
           <div className="flex items-center gap-4">
-            <NavbarButton variant="primary" href="https://ariademo.netlify.app">
+            <NavbarButton variant="primary" href={ARIA_LINK}>
               Get Your ATS Score (Beta)
             </NavbarButton>
           </div>
@@ -74,7 +75,7 @@ export function NavbarDemo() {
                 onClick={() => setIsMobileMenuOpen(false)}
                 variant="primary"
                 className="w-full"
-                href="https://ariademo.netlify.app"
+                href={ARIA_LINK}
               >
                 Get Your ATS Score (Beta)
               </NavbarButton>
