@@ -1,13 +1,9 @@
-import { HoverBorderGradient } from "./ui/hover-border-gradient"
-import Image from "next/image"
-import aria_banner from '../../public/aria_banner.png'
-import Countdown from "./utils/Countdown"
 import ResumeAnimation from "./ui/ResumeAnimation"
 import { Reveal } from "./ui/Reveal"
 import { Button } from "./ui/button"
 import { ArrowRight } from "lucide-react"
 import { ARIA_LINK } from "@/constants/Links"
-
+import Countdown from "./utils/Countdown"
 const Aria = () => {
     return (
         <div id="aria" className='flex items-center justify-center pt-20 p-5   mt-10'>
@@ -45,13 +41,11 @@ const Aria = () => {
                         </Reveal>
                         <div className="flex justify-center items-center mt-10">
                             <div className="flex justify-center items-center mt-10">
-                                {/* <Countdown /> */}
-                                <a href={ARIA_LINK}>
-
-                                <Button                                 size="lg"
-                                className="w-full md:w-auto bg-blue-500 hover:bg-blue-600 text-white group">Try ATS Compatibility Score (Beta)
+                                <Countdown />
+                                {/* <a href={ARIA_LINK}>
+                                <Button size="lg" className="w-full md:w-auto bg-blue-500 hover:bg-blue-600 text-white group">Try ATS Compatibility Score (Beta)
                                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" /></Button>
-                                </a>
+                                </a> */}
                             </div>
                             {/* <button className="px-6 py-2 rounded-md font-bold hover:-translate-y-1 transform transition duration-200 hover:shadow-md bg-gradient-to-r from-purple-600 to-blue-600 text-white border-0 shadow-lg shadow-purple-500/50 hover:from-blue-500 hover:to-purple-500 cursor-pointer">
                                 Join Aria
