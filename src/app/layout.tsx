@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { NavbarDemo } from "@/components/Navbar";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -75,7 +76,20 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NavbarDemo/>
+        <NavbarDemo />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-MW854SZGXZ"></script>
+        <script>
+          {`
+
+    window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MW854SZGXZ');
+  `}
+        </script>
+
+
         {children}
       </body>
     </html>

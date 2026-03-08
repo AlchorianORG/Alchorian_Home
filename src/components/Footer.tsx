@@ -2,7 +2,7 @@ import { Brain, Bot, Mail, Linkedin, Twitter, Github } from 'lucide-react';
 import Image from 'next/image';
 import ariaLogo from '../../public/aria_logo.png'
 import adenLogo from '../../public/aden_logo.png'
-import alchorianLogo from '../../public/alchorian_logo.png'
+import alchorianLogo from '../../public/alchorian.png'
 import {
     Dialog,
     DialogClose,
