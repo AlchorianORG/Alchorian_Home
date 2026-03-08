@@ -1,6 +1,7 @@
 import { Reveal } from './ui/Reveal';
 import { Button } from './ui/button';
 import { ArrowRight } from 'lucide-react';
+import { TYPRFORM_LINK } from '@/constants/Links';
 
 const MakeHiringBetter = () => {
     return (
@@ -39,13 +40,13 @@ const MakeHiringBetter = () => {
                         <Reveal
                             className="pt-4"
                         >
-                            <a href="">
+                            <a href={TYPRFORM_LINK} target='_blank'>
 
                             <Button
                                 size="lg"
                                 className="w-full md:w-auto bg-blue-500 hover:bg-blue-600 text-white group"
                                 >
-                                3-minute structured research survey.
+                                2-minute structured research survey.
                                 <Reveal
                                 >
                                     <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
