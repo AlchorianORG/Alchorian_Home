@@ -43,7 +43,7 @@ export const metadata = {
     siteName: "Alchorian",
     images: [
       {
-        url: "/og-image.png",
+        url: "/alchorian.png",
         width: 1200,
         height: 630,
       }
