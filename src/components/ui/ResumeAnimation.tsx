@@ -211,7 +211,7 @@ function ScoringPanel() {
         />
         <FeedbackTag
           icon={<CheckCircle2 className="w-4 h-4" />}
-          text="AI Sumary"
+          text="AI Summary"
           delay={4.6}
         />
       </div>
